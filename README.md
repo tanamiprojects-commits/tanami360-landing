@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌊 Tanami360 Landing Page
 
-## Getting Started
+**360° Platforms — Built, Hosted, Maintained.**<br>
+**פלטפורמות 360° — פיתוח, אחסון, תחזוקה.**
 
-First, run the development server:
+---
 
-```bash
+## ✨ About / על אודות
+We are a digital studio based in Herzliya, Israel. We build, host, and maintain custom web platforms — all under a predictable monthly plan.<br>
+אנחנו סטודיו דיגיטלי בהרצליה, ישראל. אנחנו בונים, מאחסנים ומתחזקים פלטפורמות ווב מותאמות אישית — במחיר חודשי קבוע.
+
+---
+
+## 🧰 Tech Stack / טכנולוגיות
+- **Next.js** · React framework
+- **Tailwind CSS** · Custom Tanami360 theme
+- **Vercel** · Hosting & deployment
+- **GitHub** · Version control
+
+---
+
+## 🚀 Getting Started / התחלה מהירה
+
+` ` `bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+` ` `
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)<br>
+פתח את [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🌍 Live Site / האתר החי
+[https://tanami360.com](https://tanami360.com)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ♿ Accessibility / נגישות
+This site includes an accessibility widget (font size, contrast).<br>
+האתר כולל רכיב נגישות (הגדלת גופן, ניגודיות).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📬 Contact / יצירת קשר
+[hello@tanami360.com](mailto:hello@tanami360.com)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📄 License / רישיון
+MIT — see [LICENSE](./LICENSE)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+**Tanami360** — From idea to live product. / מרעיון ועד למוצר חי.

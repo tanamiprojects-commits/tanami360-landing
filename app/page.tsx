@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, type ElementType } from 'react';
 
 // ============ Accessibility Context ============
 type A11ySettings = {
@@ -55,7 +55,7 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
 function DualText({
   en, he, as: Tag = 'p', classNameEn = '', classNameHe = '', containerClassName = ''
 }: {
-  en: string; he: string; as?: keyof JSX.IntrinsicElements;
+  en: string; he: string; as?: ElementType;
   classNameEn?: string; classNameHe?: string; containerClassName?: string;
 }) {
   return (

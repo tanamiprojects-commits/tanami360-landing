@@ -105,7 +105,7 @@ function DualText({
 }: {
   en: string;
   he: string;
-  as?: React.ElementType;
+  as?: React.ElementType;       // <-- תוקן!
   classNameEn?: string;
   classNameHe?: string;
   containerClassName?: string;

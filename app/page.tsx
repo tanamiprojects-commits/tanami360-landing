@@ -105,7 +105,7 @@ function DualText({
 }: {
   en: string;
   he: string;
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   classNameEn?: string;
   classNameHe?: string;
   containerClassName?: string;

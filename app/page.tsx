@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // ============ Types ============
 type Step = 1 | 2 | 3 | 4;
@@ -22,13 +22,35 @@ const content = {
     heroSub: 'From idea to live product, Tanami360 handles it all.',
     startCta: 'Get Started',
     aboutTitle: 'About Tanami360',
-    aboutText: 'We are a digital studio based in Herzliya, Israel. We design, develop, host, and maintain custom web platforms.',
+    aboutText: 'We are a digital studio based in Herzliya, Israel. We design, develop, host, and maintain custom web platforms — all under a predictable monthly plan.',
     servicesTitle: 'What We Do',
     services: [
       { title: 'Build', desc: 'Custom platforms with Next.js, Supabase, and AI.' },
       { title: 'Host', desc: 'Fast, secure hosting on Vercel with automatic SSL.' },
       { title: 'Maintain', desc: 'Monthly updates, daily backups, and priority support.' },
     ],
+    guideTitle: 'How It Works',
+    guideText: '1. Choose your platform type. 2. Select features. 3. Define scope. 4. We build, host, and maintain it.',
+    calculatorTitle: 'Project Cost Estimator',
+    calcLabel1: 'Hours of work',
+    calcLabel2: 'Hourly rate ($)',
+    calcResult: 'Estimated: $',
+    newsletterTitle: 'Stay Updated',
+    newsletterPlaceholder: 'Your email',
+    subscribeBtn: 'Subscribe',
+    calendarTitle: 'Today',
+    hebrewDate: 'Hebrew date:',
+    holidaysTitle: 'Upcoming Holidays',
+    holidays: ['Tu B\'Av – Aug 2', 'Rosh Hashanah – Sep 15', 'Yom Kippur – Sep 24', 'Sukkot – Sep 29'],
+    newsTitle: 'In the News',
+    newsItems: [
+      'Israel GDP grew 2.5% in Q2 2026',
+      'Tech stocks surge as AI regulation eases',
+      'Shekel strengthens against dollar',
+    ],
+    contactTitle: 'Let’s Talk',
+    contactText: 'Ready to build something great?',
+    footer: '© 2026 Tanami360 — Herzliya, Israel',
     wizard: {
       step1Title: '1. Choose Platform Type',
       step2Title: '2. Select Features',
@@ -51,22 +73,41 @@ const content = {
       featuresLabel: 'Features:',
       scopeLabel: 'Scope:',
     },
-    contactTitle: 'Let’s Talk',
-    contactText: 'Ready to build something great?',
-    footer: '© 2026 Tanami360 — Herzliya, Israel',
   },
   he: {
     heroTitle: 'פלטפורמות 360° — פיתוח, אחסון, תחזוקה.',
     heroSub: 'מרעיון ועד למוצר חי, Tanami360 מטפלת בהכול.',
     startCta: 'התחל עכשיו',
     aboutTitle: 'על Tanami360',
-    aboutText: 'אנחנו סטודיו דיגיטלי בהרצליה, ישראל. אנחנו מתכננים, מפתחים, מאחסנים ומתחזקים פלטפורמות ווב מותאמות אישית.',
+    aboutText: 'אנחנו סטודיו דיגיטלי בהרצליה, ישראל. אנחנו מתכננים, מפתחים, מאחסנים ומתחזקים פלטפורמות ווב מותאמות אישית — במחיר חודשי קבוע.',
     servicesTitle: 'מה אנחנו עושים',
     services: [
       { title: 'פיתוח', desc: 'פלטפורמות מותאמות עם Next.js, Supabase ו-AI.' },
       { title: 'אחסון', desc: 'אחסון מהיר ומאובטח ב-Vercel עם SSL אוטומטי.' },
       { title: 'תחזוקה', desc: 'עדכונים חודשיים, גיבויים יומיים, ותמיכה טכנית.' },
     ],
+    guideTitle: 'איך זה עובד',
+    guideText: '1. בחר סוג פלטפורמה. 2. בחר תכונות. 3. הגדר היקף. 4. אנחנו בונים, מאחסנים ומתחזקים.',
+    calculatorTitle: 'אומדן עלות פרויקט',
+    calcLabel1: 'שעות עבודה',
+    calcLabel2: 'תעריף שעתי (₪)',
+    calcResult: 'אומדן: ₪',
+    newsletterTitle: 'הישאר מעודכן',
+    newsletterPlaceholder: 'האימייל שלך',
+    subscribeBtn: 'הרשם',
+    calendarTitle: 'היום',
+    hebrewDate: 'תאריך עברי:',
+    holidaysTitle: 'חגים קרובים',
+    holidays: ['ט"ו באב – 2 באוג׳', 'ראש השנה – 15 בספט׳', 'יום כיפור – 24 בספט׳', 'סוכות – 29 בספט׳'],
+    newsTitle: 'בחדשות',
+    newsItems: [
+      'התוצר הישראלי צמח ב-2.5% ברבעון השני',
+      'עליות חדות במניות הטכנולוגיה בעולם',
+      'השקל מתחזק מול הדולר',
+    ],
+    contactTitle: 'בואו נדבר',
+    contactText: 'מוכנים לבנות משהו גדול?',
+    footer: '© 2026 Tanami360 — הרצליה, ישראל',
     wizard: {
       step1Title: '1. בחר/י סוג פלטפורמה',
       step2Title: '2. בחר/י תכונות',
@@ -89,13 +130,38 @@ const content = {
       featuresLabel: 'תכונות:',
       scopeLabel: 'היקף:',
     },
-    contactTitle: 'בואו נדבר',
-    contactText: 'מוכנים לבנות משהו גדול?',
-    footer: '© 2026 Tanami360 — הרצליה, ישראל',
   },
 };
 
-// ============ Components ============
+// ============ Intersection Observer Hook ============
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsVisible(true);
+        observer.unobserve(node);
+      }
+    }, options);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [options]);
+
+  return { ref, isVisible };
+}
+
+function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
+  const { ref, isVisible } = useInView({ threshold: 0.1 });
+  return (
+    <div ref={ref} className={`animate-on-scroll ${isVisible ? 'visible' : ''} ${className}`}>
+      {children}
+    </div>
+  );
+}
 
 function DualText({ en, he, as: Tag = 'p', classNameEn = '', classNameHe = '', containerClassName = '' }: any) {
   return (
@@ -103,25 +169,6 @@ function DualText({ en, he, as: Tag = 'p', classNameEn = '', classNameHe = '', c
       <Tag className={`text-left md:text-right w-full md:w-1/2 ${classNameEn}`}>{en}</Tag>
       <Tag className={`text-right w-full md:w-1/2 ${classNameHe}`} dir="rtl">{he}</Tag>
     </div>
-  );
-}
-
-function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`animate-on-scroll ${className}`}>
-      {children}
-    </div>
-  );
-}
-
-function CTAButton({ text }: { text: string }) {
-  return (
-    <a
-      href="mailto:hello@tanami360.com"
-      className="ripple inline-flex items-center gap-2 bg-rose text-snow px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose/90 transition-colors shadow-xl"
-    >
-      {text} <span className="text-xl">→</span>
-    </a>
   );
 }
 
@@ -134,18 +181,69 @@ function ServiceCard({ titleEn, titleHe, descEn, descHe }: { titleEn: string; ti
   );
 }
 
-// ============ Main Component ============
+// ============ Calculator Component ============
+function Calculator({ t }: { t: any }) {
+  const [hours, setHours] = useState(20);
+  const [rate, setRate] = useState(150);
+  return (
+    <div className="bg-cloud p-6 rounded-2xl max-w-md mx-auto text-center">
+      <label className="block mb-2 text-midnight">{t.calcLabel1}</label>
+      <input type="number" value={hours} onChange={e => setHours(+e.target.value)} className="w-full p-2 rounded mb-4" />
+      <label className="block mb-2 text-midnight">{t.calcLabel2}</label>
+      <input type="number" value={rate} onChange={e => setRate(+e.target.value)} className="w-full p-2 rounded mb-4" />
+      <div className="text-2xl font-bold text-rose">{t.calcResult}{hours * rate}</div>
+    </div>
+  );
+}
+
+// ============ Newsletter Component ============
+function Newsletter({ t }: { t: any }) {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+  const handleSubscribe = () => {
+    // יישלח ל-API
+    fetch('/api/lead', { method: 'POST', body: JSON.stringify({ type: 'newsletter', email }) });
+    setSubscribed(true);
+  };
+  return (
+    <div className="bg-cloud p-6 rounded-2xl text-center">
+      {subscribed ? (
+        <p className="text-rose font-semibold">Thanks! / תודה!</p>
+      ) : (
+        <div className="flex gap-2 justify-center">
+          <input type="email" placeholder={t.newsletterPlaceholder} value={email} onChange={e => setEmail(e.target.value)} className="p-2 rounded" />
+          <button onClick={handleSubscribe} className="bg-rose text-snow px-4 py-2 rounded-full">{t.subscribeBtn}</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ============ Calendar Component ============
+function Calendar({ t }: { t: any }) {
+  const today = new Date();
+  const hebrewDate = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', { dateStyle: 'full' }).format(today);
+  return (
+    <div className="bg-cloud p-6 rounded-2xl text-center">
+      <h3 className="text-xl font-bold mb-2 text-midnight">{t.calendarTitle}</h3>
+      <p className="text-sm text-midnight/70">{today.toDateString()}</p>
+      <p className="text-sm text-rose">{t.hebrewDate} {hebrewDate}</p>
+      <div className="mt-4">
+        <h4 className="font-semibold">{t.holidaysTitle}</h4>
+        <ul className="text-sm text-midnight/70">
+          {t.holidays.map((h: string) => <li key={h}>{h}</li>)}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const [lang, setLang] = useState<Language>('en');
   const [showWizard, setShowWizard] = useState(false);
   const [step, setStep] = useState<Step>(1);
   const [selection, setSelection] = useState<SelectionData>({
-    platform: '',
-    features: [],
-    scope: '',
-    name: '',
-    email: '',
-    phone: '',
+    platform: '', features: [], scope: '', name: '', email: '', phone: '',
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -162,36 +260,23 @@ export default function Home() {
 
   const t = content[lang];
 
-  const handleSelectPlatform = (p: string) => {
-    setSelection(prev => ({ ...prev, platform: p }));
-    setTimeout(() => setStep(2), 300);
-  };
-
+  const handleSelectPlatform = (p: string) => { setSelection(prev => ({ ...prev, platform: p })); setTimeout(() => setStep(2), 300); };
   const toggleFeature = (f: string) => {
     setSelection(prev => ({
       ...prev,
       features: prev.features.includes(f) ? prev.features.filter(x => x !== f) : [...prev.features, f],
     }));
   };
-
-  const handleSelectScope = (s: string) => {
-    setSelection(prev => ({ ...prev, scope: s }));
-    setTimeout(() => setStep(4), 300);
-  };
-
+  const handleSelectScope = (s: string) => { setSelection(prev => ({ ...prev, scope: s })); setTimeout(() => setStep(4), 300); };
   const handleSubmit = async () => {
     setSending(true);
-    const body = JSON.stringify({ ...selection, language: lang });
-    try {
-      await fetch('/api/lead', { method: 'POST', body });
-    } catch {}
+    const body = JSON.stringify({ ...selection, language: lang, type: 'wizard' });
+    try { await fetch('/api/lead', { method: 'POST', body }); } catch {}
     setSending(false);
     setSent(true);
   };
-
   const resetWizard = () => {
-    setShowWizard(false);
-    setStep(1);
+    setShowWizard(false); setStep(1);
     setSelection({ platform: '', features: [], scope: '', name: '', email: '', phone: '' });
     setSent(false);
   };
@@ -230,34 +315,23 @@ export default function Home() {
             <button onClick={resetWizard} className="text-midnight/50 hover:text-midnight float-right text-2xl">&times;</button>
             {!sent ? (
               <>
-                {/* Progress bar */}
-                <div className="w-full bg-cloud rounded-full h-2 mb-6">
-                  <div className="bg-rose h-2 rounded-full transition-all duration-500" style={{ width: `${(step/4)*100}%` }} />
-                </div>
-
-                {/* Step 1 */}
+                <div className="w-full bg-cloud rounded-full h-2 mb-6"><div className="bg-rose h-2 rounded-full transition-all duration-500" style={{ width: `${(step/4)*100}%` }} /></div>
                 {step === 1 && (
                   <div>
                     <h2 className="text-2xl font-bold mb-6 text-midnight">{t.wizard.step1Title}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {t.wizard.platforms.map(p => (
-                        <button key={p} onClick={() => handleSelectPlatform(p)} className="p-4 border border-cloud rounded-xl hover:border-rose hover:bg-rose/5 transition text-midnight font-medium">
-                          {p}
-                        </button>
+                        <button key={p} onClick={() => handleSelectPlatform(p)} className="p-4 border border-cloud rounded-xl hover:border-rose hover:bg-rose/5 transition text-midnight font-medium">{p}</button>
                       ))}
                     </div>
                   </div>
                 )}
-
-                {/* Step 2 */}
                 {step === 2 && (
                   <div>
                     <h2 className="text-2xl font-bold mb-6 text-midnight">{t.wizard.step2Title}</h2>
                     <div className="flex flex-wrap gap-3">
                       {t.wizard.features.map(f => (
-                        <button key={f} onClick={() => toggleFeature(f)} className={`px-4 py-2 rounded-full border font-medium transition ${selection.features.includes(f) ? 'bg-rose text-snow border-rose' : 'bg-cloud text-midnight border-cloud'}`}>
-                          {f}
-                        </button>
+                        <button key={f} onClick={() => toggleFeature(f)} className={`px-4 py-2 rounded-full border font-medium transition ${selection.features.includes(f) ? 'bg-rose text-snow border-rose' : 'bg-cloud text-midnight border-cloud'}`}>{f}</button>
                       ))}
                     </div>
                     <div className="flex justify-between mt-8">
@@ -266,16 +340,12 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-
-                {/* Step 3 */}
                 {step === 3 && (
                   <div>
                     <h2 className="text-2xl font-bold mb-6 text-midnight">{t.wizard.step3Title}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {t.wizard.scopes.map(s => (
-                        <button key={s} onClick={() => handleSelectScope(s)} className="p-4 border border-cloud rounded-xl hover:border-rose hover:bg-rose/5 transition text-midnight font-medium">
-                          {s}
-                        </button>
+                        <button key={s} onClick={() => handleSelectScope(s)} className="p-4 border border-cloud rounded-xl hover:border-rose hover:bg-rose/5 transition text-midnight font-medium">{s}</button>
                       ))}
                     </div>
                     <div className="flex justify-between mt-8">
@@ -283,8 +353,6 @@ export default function Home() {
                     </div>
                   </div>
                 )}
-
-                {/* Step 4 */}
                 {step === 4 && (
                   <div>
                     <h2 className="text-2xl font-bold mb-6 text-midnight">{t.wizard.step4Title}</h2>
@@ -295,9 +363,7 @@ export default function Home() {
                     </div>
                     <div className="flex justify-between mt-8">
                       <button onClick={() => setStep(3)} className="text-midnight/60 hover:text-midnight">{t.wizard.back}</button>
-                      <button onClick={handleSubmit} disabled={sending} className="bg-rose text-snow px-6 py-2 rounded-full disabled:opacity-50">
-                        {sending ? t.wizard.sending : t.wizard.send}
-                      </button>
+                      <button onClick={handleSubmit} disabled={sending} className="bg-rose text-snow px-6 py-2 rounded-full disabled:opacity-50">{sending ? t.wizard.sending : t.wizard.send}</button>
                     </div>
                   </div>
                 )}
@@ -338,12 +404,52 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
+      {/* Guide */}
+      <AnimatedSection className="py-16 bg-cloud">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <DualText en={t.guideTitle} he={t.guideTitle} as="h2" classNameEn="text-3xl font-bold mb-6" classNameHe="text-3xl font-bold mb-6" />
+          <DualText en={t.guideText} he={t.guideText} classNameEn="text-lg text-midnight/70" classNameHe="text-lg text-midnight/70" />
+        </div>
+      </AnimatedSection>
+
+      {/* Calculator + Calendar + Newsletter */}
+      <AnimatedSection className="py-20 bg-snow">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h3 className="text-2xl font-bold text-center mb-4 text-midnight">{t.calculatorTitle}</h3>
+            <Calculator t={t} />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-center mb-4 text-midnight">{t.calendarTitle}</h3>
+            <Calendar t={t} />
+          </div>
+          <div>
+            <h3 className="text-2xl font-bold text-center mb-4 text-midnight">{t.newsletterTitle}</h3>
+            <Newsletter t={t} />
+          </div>
+        </div>
+      </AnimatedSection>
+
+      {/* News */}
+      <AnimatedSection className="py-16 bg-cloud">
+        <div className="max-w-4xl mx-auto px-6">
+          <h3 className="text-3xl font-bold text-center mb-6 text-midnight">{t.newsTitle}</h3>
+          <ul className="space-y-3 text-center">
+            {t.newsItems.map((item: string) => (
+              <li key={item} className="bg-snow p-3 rounded-xl shadow-sm text-midnight/80">{item}</li>
+            ))}
+          </ul>
+        </div>
+      </AnimatedSection>
+
       {/* Contact */}
       <AnimatedSection className="py-20 bg-midnight text-snow">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <DualText en={t.contactTitle} he={t.contactTitle} as="h2" classNameEn="text-3xl md:text-4xl font-bold mb-6" classNameHe="text-3xl md:text-4xl font-bold mb-6" />
           <DualText en={t.contactText} he={t.contactText} classNameEn="text-xl mb-8 text-cloud" classNameHe="text-xl mb-8 text-cloud" />
-          <CTAButton text="hello@tanami360.com" />
+          <a href="mailto:hello@tanami360.com" className="ripple inline-flex items-center gap-2 bg-rose text-snow px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose/90 transition-colors shadow-xl">
+            hello@tanami360.com
+          </a>
         </div>
       </AnimatedSection>
 

@@ -14,7 +14,7 @@ interface Selection {
   phone: string;
 }
 
-// ============ Bilingual Content ============
+// ============ Bilingual Content (split labels) ============
 const content = {
   en: {
     heroTitle: '360° Platforms — Built, Hosted, Maintained.',
@@ -25,68 +25,120 @@ const content = {
     startCtaHe: 'התחל פרויקט',
     aboutTitle: 'About Tanami360',
     aboutTitleHe: 'על Tanami360',
-    aboutText: 'We are a digital studio based in Herzliya, Israel. We design, develop, host, and maintain custom web platforms — all under a predictable monthly plan.',
-    aboutTextHe: 'אנחנו סטודיו דיגיטלי בהרצליה, ישראל. אנחנו מתכננים, מפתחים, מאחסנים ומתחזקים פלטפורמות ווב מותאמות אישית — במחיר חודשי קבוע.',
+    aboutText: 'We are a digital studio based in Herzliya, Israel...',
+    aboutTextHe: 'אנחנו סטודיו דיגיטלי בהרצליה, ישראל...',
     servicesTitle: 'What We Do',
     servicesTitleHe: 'מה אנחנו עושים',
     services: [
       { icon: '🛠️', title: 'Build', titleHe: 'פיתוח', desc: 'Custom platforms with Next.js, Supabase, and AI.', descHe: 'פלטפורמות מותאמות עם Next.js, Supabase ו-AI.' },
-      { icon: '☁️', title: 'Host', titleHe: 'אחסון', desc: 'Fast, secure hosting on Vercel with automatic SSL.', descHe: 'אחסון מהיר ומאובטח ב-Vercel עם SSL אוטומטי.' },
-      { icon: '🔧', title: 'Maintain', titleHe: 'תחזוקה', desc: 'Monthly updates, daily backups, and priority support.', descHe: 'עדכונים חודשיים, גיבויים יומיים, ותמיכה טכנית.' },
+      { icon: '☁️', title: 'Host', titleHe: 'אחסון', desc: 'Fast, secure hosting on Vercel...', descHe: 'אחסון מהיר ומאובטח ב-Vercel...' },
+      { icon: '🔧', title: 'Maintain', titleHe: 'תחזוקה', desc: 'Monthly updates, daily backups...', descHe: 'עדכונים חודשיים, גיבויים יומיים...' },
     ],
     guideTitle: 'How It Works',
     guideTitleHe: 'איך זה עובד',
-    guideSteps: ['Choose your platform type.', 'Select the features you need.', 'Define the project scope.', 'Leave your details, and we’ll get back to you.'],
-    guideStepsHe: ['בחר/י את סוג הפלטפורמה.', 'בחר/י את התכונות הנדרשות.', 'הגדר/י את היקף הפרויקט.', 'השאר/י פרטים ונחזור אליך.'],
+    guideSteps: ['Choose platform type.', 'Select features.', 'Define scope.', 'Leave details.'],
+    guideStepsHe: ['בחר/י סוג פלטפורמה.', 'בחר/י תכונות.', 'הגדר/י היקף.', 'השאר/י פרטים.'],
     stepTitles: ['Platform Type', 'Features', 'Scope', 'Your Details'],
     stepTitlesHe: ['סוג פלטפורמה', 'תכונות', 'היקף', 'הפרטים שלך'],
     platforms: [
-      { icon: '🌐', value: 'webapp', label: 'Web Application', labelHe: 'אפליקציית ווב', desc: 'Responsive web app, ideal for SaaS and dashboards.', descHe: 'אפליקציה רספונסיבית, מתאימה ל-SaaS ודאשבורדים.' },
-      { icon: '📦', value: 'saas', label: 'SaaS Product', labelHe: 'מערכת SaaS', desc: 'Subscription-based service with billing and multi-tenancy.', descHe: 'שירות מבוסס מנוי עם חיובים ורב-דיירות.' },
-      { icon: '📊', value: 'dashboard', label: 'Dashboard / Admin', labelHe: 'לוח בקרה / אדמין', desc: 'Internal tools, analytics panels, data visualization.', descHe: 'כלים פנימיים, פאנלי אנליטיקה, תצוגות נתונים.' },
-      { icon: '⚙️', value: 'custom', label: 'Fully Custom', labelHe: 'מערכת מותאמת אישית', desc: 'Unique platform built from scratch to your specs.', descHe: 'פלטפורמה ייחודית שנבנית לפי המפרט המדויק שלך.' },
+      { icon: '🌐', value: 'webapp', label: 'Web Application', labelHe: 'אפליקציית ווב', desc: 'Responsive web app...', descHe: 'אפליקציה רספונסיבית...' },
+      { icon: '📦', value: 'saas', label: 'SaaS Product', labelHe: 'מערכת SaaS', desc: 'Subscription-based...', descHe: 'שירות מבוסס מנוי...' },
+      { icon: '📊', value: 'dashboard', label: 'Dashboard / Admin', labelHe: 'לוח בקרה / אדמין', desc: 'Internal tools...', descHe: 'כלים פנימיים...' },
+      { icon: '⚙️', value: 'custom', label: 'Fully Custom', labelHe: 'מערכת מותאמת אישית', desc: 'Unique platform...', descHe: 'פלטפורמה ייחודית...' },
     ],
     features: [
-      { icon: '👤', value: 'auth', label: 'User Authentication', labelHe: 'אימות משתמשים', desc: 'Login, registration, social login, roles.', descHe: 'כניסה, הרשמה, התחברות חברתית, הרשאות.' },
-      { icon: '💳', value: 'payments', label: 'Payments (Stripe)', labelHe: 'תשלומים (Stripe)', desc: 'Subscription billing, one-time payments, invoices.', descHe: 'חיובי מנוי, תשלומים חד-פעמיים, חשבוניות.' },
-      { icon: '⚙️', value: 'admin', label: 'Admin Panel', labelHe: 'לוח בקרה', desc: 'Manage users, content, settings.', descHe: 'ניהול משתמשים, תוכן, הגדרות.' },
-      { icon: '🔗', value: 'api', label: 'API Integration', labelHe: 'חיבור API', desc: 'REST/GraphQL APIs, webhooks.', descHe: 'ממשקי API, וובהוקס.' },
-      { icon: '🤖', value: 'automation', label: 'Automations', labelHe: 'אוטומציות', desc: 'Workflows, email triggers, scheduled tasks.', descHe: 'תהליכים אוטומטיים, טריגרים, משימות מתוזמנות.' },
-      { icon: '🧠', value: 'ai', label: 'AI Features', labelHe: 'תכונות AI', desc: 'Chatbots, content generation, custom models.', descHe: 'צ׳אטבוטים, יצירת תוכן, מודלים מותאמים.' },
+      { icon: '👤', value: 'auth', label: 'User Authentication', labelHe: 'אימות משתמשים', desc: 'Login, registration...', descHe: 'כניסה, הרשמה...' },
+      { icon: '💳', value: 'payments', label: 'Payments (Stripe)', labelHe: 'תשלומים (Stripe)', desc: 'Subscription billing...', descHe: 'חיובי מנוי...' },
+      { icon: '⚙️', value: 'admin', label: 'Admin Panel', labelHe: 'לוח בקרה', desc: 'Manage users...', descHe: 'ניהול משתמשים...' },
+      { icon: '🔗', value: 'api', label: 'API Integration', labelHe: 'חיבור API', desc: 'REST/GraphQL...', descHe: 'ממשקי API...' },
+      { icon: '🤖', value: 'automation', label: 'Automations', labelHe: 'אוטומציות', desc: 'Workflows...', descHe: 'תהליכים אוטומטיים...' },
+      { icon: '🧠', value: 'ai', label: 'AI Features', labelHe: 'תכונות AI', desc: 'Chatbots...', descHe: 'צ׳אטבוטים...' },
     ],
     scopes: [
-      { icon: '🚀', value: 'mvp', label: 'Quick MVP (2 weeks)', labelHe: 'MVP מהיר (שבועיים)', desc: 'Functional prototype to test the market.', descHe: 'אב-טיפוס פונקציונלי לבדיקת השוק.' },
-      { icon: '🏗️', value: 'full', label: 'Full Product (1-2 months)', labelHe: 'מוצר מלא (1-2 חודשים)', desc: 'Production-ready platform with all features.', descHe: 'פלטפורמה מלאה ומוכנה לייצור.' },
-      { icon: '🔄', value: 'maintenance', label: 'Monthly Maintenance', labelHe: 'תחזוקה חודשית', desc: 'Ongoing support, updates, backups.', descHe: 'עדכונים, גיבויים, תמיכה.' },
+      { icon: '🚀', value: 'mvp', label: 'Quick MVP (2 weeks)', labelHe: 'MVP מהיר (שבועיים)', desc: 'Functional prototype...', descHe: 'אב-טיפוס פונקציונלי...' },
+      { icon: '🏗️', value: 'full', label: 'Full Product (1-2 months)', labelHe: 'מוצר מלא (1-2 חודשים)', desc: 'Production-ready...', descHe: 'פלטפורמה מלאה...' },
+      { icon: '🔄', value: 'maintenance', label: 'Monthly Maintenance', labelHe: 'תחזוקה חודשית', desc: 'Ongoing support...', descHe: 'עדכונים, גיבויים...' },
     ],
     namePlaceholder: 'Full Name / שם מלא',
     emailPlaceholder: 'Email / אימייל',
     phonePlaceholder: 'Phone (optional) / טלפון (רשות)',
-    backBtn: 'Back / חזור',
-    nextBtn: 'Next / המשך',
-    sendBtn: 'Send Request / שלח בקשה',
-    sendingText: 'Sending... / שולח...',
-    successTitle: 'Request Sent! / הבקשה נשלחה!',
-    successText: 'We will review your choices and get back to you within 24 hours. / נבחן את הבחירות ונחזור תוך 24 שעות.',
-    summaryTitle: 'Your Selection / הבחירה שלך',
-    calendarTitle: 'Today & Holidays / היום וחגים',
-    holidays: ['Tu B\'Av – Aug 2 / ט"ו באב – 2 באוג׳', 'Rosh Hashanah – Sep 15 / ראש השנה – 15 בספט׳', 'Yom Kippur – Sep 24 / יום כיפור – 24 בספט׳', 'Sukkot – Sep 29 / סוכות – 29 בספט׳'],
-    newsTitle: 'In the News / בחדשות',
-    newsItems: ['Israel GDP grew 2.5% / התוצר הישראלי צמח ב-2.5%', 'Tech stocks surge / עליות במניות הטכנולוגיה', 'Shekel strengthens / השקל מתחזק'],
-    calculatorTitle: 'Cost Estimator / אומדן עלויות',
-    calcHoursLabel: 'Hours / שעות',
-    calcRateLabel: 'Rate ($/₪) / תעריף',
-    calcResult: 'Estimate: / אומדן: ',
-    newsletterTitle: 'Stay Updated / הישאר מעודכן',
-    newsletterPlaceholder: 'Your email / האימייל שלך',
-    subscribeBtn: 'Subscribe / הרשם',
-    contactTitle: 'Let’s Talk / בואו נדבר',
-    contactText: 'Ready to build? / מוכנים לבנות?',
-    footer: '© 2026 Tanami360 — Herzliya, Israel / הרצליה, ישראל',
+    backBtn: 'Back',
+    backBtnHe: 'חזור',
+    nextBtn: 'Next',
+    nextBtnHe: 'המשך',
+    sendBtn: 'Send Request',
+    sendBtnHe: 'שלח בקשה',
+    sendingText: 'Sending...',
+    sendingTextHe: 'שולח...',
+    successTitle: 'Request Sent!',
+    successTitleHe: 'הבקשה נשלחה!',
+    successText: 'We will review...',
+    successTextHe: 'נבחן את הבחירות...',
+    summaryTitle: 'Your Selection',
+    summaryTitleHe: 'הבחירה שלך',
+    calendarTitle: 'Today & Holidays',
+    calendarTitleHe: 'היום וחגים',
+    holidays: [
+      { en: 'Tu B\'Av – Aug 2', he: 'ט"ו באב – 2 באוג׳' },
+      { en: 'Rosh Hashanah – Sep 15', he: 'ראש השנה – 15 בספט׳' },
+      { en: 'Yom Kippur – Sep 24', he: 'יום כיפור – 24 בספט׳' },
+      { en: 'Sukkot – Sep 29', he: 'סוכות – 29 בספט׳' },
+    ],
+    newsTitle: 'In the News',
+    newsTitleHe: 'בחדשות',
+    newsItems: [
+      { en: 'Israel GDP grew 2.5%', he: 'התוצר הישראלי צמח ב-2.5%' },
+      { en: 'Tech stocks surge', he: 'עליות במניות הטכנולוגיה' },
+      { en: 'Shekel strengthens', he: 'השקל מתחזק' },
+    ],
+    calculatorTitle: 'Cost Estimator',
+    calculatorTitleHe: 'אומדן עלויות',
+    calcHoursLabel: 'Hours',
+    calcHoursLabelHe: 'שעות',
+    calcRateLabel: 'Rate ($/₪)',
+    calcRateLabelHe: 'תעריף',
+    calcResultPrefix: 'Estimate: ',
+    calcResultPrefixHe: 'אומדן: ',
+    newsletterTitle: 'Stay Updated',
+    newsletterTitleHe: 'הישאר מעודכן',
+    newsletterPlaceholder: 'Your email',
+    newsletterPlaceholderHe: 'האימייל שלך',
+    subscribeBtn: 'Subscribe',
+    subscribeBtnHe: 'הרשם',
+    contactTitle: 'Let’s Talk',
+    contactTitleHe: 'בואו נדבר',
+    contactText: 'Ready to build?',
+    contactTextHe: 'מוכנים לבנות?',
+    footer: '© 2026 Tanami360 — Herzliya, Israel',
+    footerHe: '© 2026 Tanami360 — הרצליה, ישראל',
   },
 };
 
-// ============ DualText with preference ============
+// ============ DualTextInline (for buttons/links) ============
+function DualTextInline({
+  en,
+  he,
+  preferredLang,
+  classNameEn = '',
+  classNameHe = '',
+}: {
+  en: string;
+  he: string;
+  preferredLang: LangPref;
+  classNameEn?: string;
+  classNameHe?: string;
+}) {
+  const isEn = preferredLang === 'en';
+  return (
+    <>
+      <span className={`${isEn ? 'font-bold' : 'text-sm opacity-50'} ${classNameEn}`}>{en}</span>
+      <span className="mx-1 opacity-50">/</span>
+      <span className={`${isEn ? 'text-sm opacity-50' : 'font-bold'} ${classNameHe}`}>{he}</span>
+    </>
+  );
+}
+
+// ============ DualText (full for sections) ============
 function DualText({
   en,
   he,
@@ -116,6 +168,7 @@ function DualText({
   );
 }
 
+// ============ AnimatedSection ============
 function AnimatedSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -135,6 +188,7 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
   );
 }
 
+// ============ Accessibility Widget ============
 function AccessibilityWidget() {
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState(100);
@@ -176,10 +230,13 @@ function AccessibilityWidget() {
   );
 }
 
+// ============ Main Component ============
 export default function Home() {
   const [preferredLang, setPreferredLang] = useState<LangPref>('en');
   const [step, setStep] = useState(0);
-  const [selection, setSelection] = useState<Selection>({ platform: '', features: [], scope: '', name: '', email: '', phone: '' });
+  const [selection, setSelection] = useState<Selection>({
+    platform: '', features: [], scope: '', name: '', email: '', phone: '',
+  });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -195,14 +252,20 @@ export default function Home() {
 
   const t = content.en;
   const selectPlatform = (p: string) => { setSelection(prev => ({ ...prev, platform: p })); setStep(1); };
-  const toggleFeature = (f: string) => setSelection(prev => ({ ...prev, features: prev.features.includes(f) ? prev.features.filter(x => x !== f) : [...prev.features, f] }));
+  const toggleFeature = (f: string) => setSelection(prev => ({
+    ...prev,
+    features: prev.features.includes(f) ? prev.features.filter(x => x !== f) : [...prev.features, f],
+  }));
   const selectScope = (s: string) => { setSelection(prev => ({ ...prev, scope: s })); setStep(3); };
   const submit = async () => {
     setSending(true);
     try { await fetch('/api/lead', { method: 'POST', body: JSON.stringify({ ...selection, preferredLang }) }); } catch {}
     setSending(false); setSent(true);
   };
-  const reset = () => { setStep(0); setSelection({ platform: '', features: [], scope: '', name: '', email: '', phone: '' }); setSent(false); };
+  const reset = () => {
+    setStep(0); setSent(false);
+    setSelection({ platform: '', features: [], scope: '', name: '', email: '', phone: '' });
+  };
 
   const renderCard = (item: any, onSelect: (val: string) => void, isSelected: boolean) => (
     <button
@@ -228,7 +291,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-      {/* Decorative glow on hover */}
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-rose/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
     </button>
   );
@@ -245,7 +307,7 @@ export default function Home() {
         <button onClick={() => updatePref('he')} className={`px-3 py-1 rounded-full text-xs font-semibold transition ${preferredLang === 'he' ? 'bg-rose text-snow' : 'bg-cloud text-midnight'}`}>ע</button>
       </div>
 
-      {/* Hero with rich gradient and animated elements */}
+      {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-midnight via-midnight to-rose/30 text-snow">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-rose/20 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-36 text-center relative z-10">
@@ -253,12 +315,15 @@ export default function Home() {
             <DualText en={t.heroTitle} he={t.heroTitleHe} preferredLang={preferredLang} containerClassName="flex-col md:flex-row" />
           </h1>
           <DualText en={t.heroSub} he={t.heroSubHe} classNameEn="text-xl md:text-2xl mb-12 text-cloud/80" classNameHe="text-xl md:text-2xl mb-12 text-cloud/80" preferredLang={preferredLang} />
-          <button onClick={() => { setStep(0); setSent(false); }} className="ripple inline-flex items-center gap-3 bg-rose text-snow px-10 py-5 rounded-full text-xl font-semibold hover:bg-rose/90 transition-all shadow-2xl hover:scale-105">
-            <DualText en={t.startCta} he={t.startCtaHe} preferredLang={preferredLang} containerClassName="inline-flex gap-2" />
+          {/* FIXED: No div inside button */}
+          <button
+            onClick={() => { setStep(0); setSent(false); }}
+            className="ripple inline-flex items-center gap-3 bg-rose text-snow px-10 py-5 rounded-full text-xl font-semibold hover:bg-rose/90 transition-all shadow-2xl hover:scale-105"
+          >
+            <DualTextInline en={t.startCta} he={t.startCtaHe} preferredLang={preferredLang} />
             <span className="text-2xl">→</span>
           </button>
         </div>
-        {/* Animated waves */}
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
           <svg className="relative w-full h-24 md:h-36 animate-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" fill="none">
             <path d="M0 70C240 30 480 100 720 60C960 20 1200 100 1440 50V100H0V70Z" fill="#F7F7F9" />
@@ -266,13 +331,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Wizard Section with glassmorphism */}
+      {/* Wizard */}
       <section className="py-20 bg-transparent relative -mt-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-2xl p-8 md:p-12 border border-white/50">
             {!sent ? (
               <>
-                {/* Progress Steps */}
                 <div className="flex flex-wrap justify-between mb-12 gap-2">
                   {t.stepTitles.map((title: string, idx: number) => (
                     <div key={idx} className={`flex-1 min-w-[100px] text-center pb-2 border-b-4 transition-colors ${idx <= step ? 'border-rose' : 'border-cloud'}`}>
@@ -306,8 +370,12 @@ export default function Home() {
                       {t.features.map((f: any) => renderCard(f, toggleFeature, selection.features.includes(f.value)))}
                     </div>
                     <div className="flex justify-between mt-12">
-                      <button onClick={() => setStep(0)} className="text-midnight/60 hover:text-midnight font-medium"><DualText en={t.backBtn} he={t.backBtn} preferredLang={preferredLang} /></button>
-                      <button onClick={() => setStep(2)} className="bg-rose text-snow px-8 py-3 rounded-full font-semibold hover:bg-rose/90 transition shadow-lg"><DualText en={t.nextBtn} he={t.nextBtn} preferredLang={preferredLang} /></button>
+                      <button onClick={() => setStep(0)} className="text-midnight/60 hover:text-midnight font-medium inline-flex items-center gap-1">
+                        <DualTextInline en={t.backBtn} he={t.backBtnHe} preferredLang={preferredLang} />
+                      </button>
+                      <button onClick={() => setStep(2)} className="bg-rose text-snow px-8 py-3 rounded-full font-semibold hover:bg-rose/90 transition shadow-lg inline-flex items-center gap-1">
+                        <DualTextInline en={t.nextBtn} he={t.nextBtnHe} preferredLang={preferredLang} />
+                      </button>
                     </div>
                   </div>
                 )}
@@ -321,7 +389,9 @@ export default function Home() {
                       {t.scopes.map((s: any) => renderCard(s, selectScope, selection.scope === s.value))}
                     </div>
                     <div className="flex justify-between mt-12">
-                      <button onClick={() => setStep(1)} className="text-midnight/60 hover:text-midnight font-medium"><DualText en={t.backBtn} he={t.backBtn} preferredLang={preferredLang} /></button>
+                      <button onClick={() => setStep(1)} className="text-midnight/60 hover:text-midnight font-medium inline-flex items-center gap-1">
+                        <DualTextInline en={t.backBtn} he={t.backBtnHe} preferredLang={preferredLang} />
+                      </button>
                     </div>
                   </div>
                 )}
@@ -337,9 +407,11 @@ export default function Home() {
                       <input type="tel" placeholder={t.phonePlaceholder} value={selection.phone} onChange={e => setSelection(prev => ({ ...prev, phone: e.target.value }))} className="w-full p-4 bg-white/70 backdrop-blur border border-cloud rounded-xl focus:border-rose outline-none text-lg" />
                     </div>
                     <div className="flex justify-between mt-12">
-                      <button onClick={() => setStep(2)} className="text-midnight/60 hover:text-midnight font-medium"><DualText en={t.backBtn} he={t.backBtn} preferredLang={preferredLang} /></button>
-                      <button onClick={submit} disabled={sending} className="bg-rose text-snow px-10 py-4 rounded-full font-bold text-lg hover:bg-rose/90 transition shadow-xl disabled:opacity-50">
-                        <DualText en={sending ? t.sendingText : t.sendBtn} he={sending ? t.sendingText : t.sendBtn} preferredLang={preferredLang} />
+                      <button onClick={() => setStep(2)} className="text-midnight/60 hover:text-midnight font-medium inline-flex items-center gap-1">
+                        <DualTextInline en={t.backBtn} he={t.backBtnHe} preferredLang={preferredLang} />
+                      </button>
+                      <button onClick={submit} disabled={sending} className="bg-rose text-snow px-10 py-4 rounded-full font-bold text-lg hover:bg-rose/90 transition shadow-xl disabled:opacity-50 inline-flex items-center gap-1">
+                        <DualTextInline en={sending ? t.sendingText : t.sendBtn} he={sending ? t.sendingTextHe : t.sendBtnHe} preferredLang={preferredLang} />
                       </button>
                     </div>
                   </div>
@@ -347,8 +419,8 @@ export default function Home() {
               </>
             ) : (
               <div className="text-center py-10">
-                <h2 className="text-3xl font-bold text-midnight mb-6"><DualText en={t.successTitle} he={t.successTitle} preferredLang={preferredLang} /></h2>
-                <p className="text-midnight/70 mb-8"><DualText en={t.successText} he={t.successText} preferredLang={preferredLang} /></p>
+                <h2 className="text-3xl font-bold text-midnight mb-6"><DualText en={t.successTitle} he={t.successTitleHe} preferredLang={preferredLang} /></h2>
+                <p className="text-midnight/70 mb-8"><DualText en={t.successText} he={t.successTextHe} preferredLang={preferredLang} /></p>
                 <div className="bg-cloud p-6 rounded-2xl max-w-sm mx-auto text-left text-sm space-y-3">
                   <p className="font-bold text-lg">{preferredLang === 'en' ? t.platforms.find((p:any) => p.value === selection.platform)?.label : t.platforms.find((p:any) => p.value === selection.platform)?.labelHe}</p>
                   <p><span className="font-medium">Features:</span> {selection.features.map(f => preferredLang === 'en' ? t.features.find((x:any) => x.value === f)?.label : t.features.find((x:any) => x.value === f)?.labelHe).join(', ')}</p>
@@ -361,7 +433,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section with gradient accent */}
+      {/* About */}
       <AnimatedSection className="py-20 bg-gradient-to-b from-cloud to-snow">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <DualText en={t.aboutTitle} he={t.aboutTitleHe} as="h2" classNameEn="text-4xl md:text-5xl font-extrabold mb-10 text-midnight" classNameHe="text-4xl md:text-5xl font-extrabold mb-10 text-midnight" preferredLang={preferredLang} />
@@ -372,7 +444,7 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* Services with rich cards */}
+      {/* Services */}
       <AnimatedSection className="py-20 bg-snow">
         <div className="max-w-7xl mx-auto px-6">
           <DualText en={t.servicesTitle} he={t.servicesTitleHe} as="h2" classNameEn="text-4xl md:text-5xl font-extrabold text-center mb-16" classNameHe="text-4xl md:text-5xl font-extrabold text-center mb-16" preferredLang={preferredLang} />
@@ -404,32 +476,108 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* Calculator, Calendar, Newsletter */}
+      {/* ---- REDESIGNED SECTIONS ---- */}
       <AnimatedSection className="py-20 bg-cloud">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl">
-            <h3 className="text-2xl font-bold mb-6 text-center text-midnight"><DualText en={t.calculatorTitle} he={t.calculatorTitle} preferredLang={preferredLang} /></h3>
-            <CostCalculator t={t} preferredLang={preferredLang} />
+          {/* Calculator with glassmorphism */}
+          <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl border border-white/50 hover:shadow-2xl transition">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-4xl">🧮</span>
+              <h3 className="text-2xl font-bold text-midnight">
+                <DualText en={t.calculatorTitle} he={t.calculatorTitleHe} preferredLang={preferredLang} />
+              </h3>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <label className="block mb-2 text-midnight font-medium">
+                  <DualText en={t.calcHoursLabel} he={t.calcHoursLabelHe} preferredLang={preferredLang} />
+                </label>
+                <input type="number" defaultValue={20} className="w-full p-3 rounded-xl border border-cloud bg-snow/50 focus:border-rose outline-none" />
+              </div>
+              <div>
+                <label className="block mb-2 text-midnight font-medium">
+                  <DualText en={t.calcRateLabel} he={t.calcRateLabelHe} preferredLang={preferredLang} />
+                </label>
+                <input type="number" defaultValue={150} className="w-full p-3 rounded-xl border border-cloud bg-snow/50 focus:border-rose outline-none" />
+              </div>
+              <div className="pt-4 border-t border-rose/20">
+                <p className="text-3xl font-extrabold text-rose">
+                  <DualText en={`${t.calcResultPrefix}3000`} he={`${t.calcResultPrefixHe}3000`} preferredLang={preferredLang} />
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl">
-            <h3 className="text-2xl font-bold mb-6 text-center text-midnight"><DualText en={t.calendarTitle} he={t.calendarTitle} preferredLang={preferredLang} /></h3>
-            <Calendar t={t} />
+
+          {/* Calendar with rich styling */}
+          <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl border border-white/50 hover:shadow-2xl transition">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-4xl">📅</span>
+              <h3 className="text-2xl font-bold text-midnight">
+                <DualText en={t.calendarTitle} he={t.calendarTitleHe} preferredLang={preferredLang} />
+              </h3>
+            </div>
+            <div className="space-y-6">
+              <div className="bg-snow/50 p-4 rounded-2xl">
+                <p className="text-3xl font-bold text-midnight">
+                  {new Date().toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                </p>
+                <p className="text-lg text-rose mt-1">
+                  {new Intl.DateTimeFormat('he-IL-u-ca-hebrew', { dateStyle: 'full' }).format(new Date())}
+                </p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-midnight mb-3 flex items-center gap-2">
+                  <span>🎌</span> Upcoming / קרובים
+                </h4>
+                <ul className="space-y-2 text-sm text-midnight/70">
+                  {t.holidays.map((h: any, i: number) => (
+                    <li key={i} className="bg-snow/50 p-2 rounded-lg">
+                      <DualText en={h.en} he={h.he} preferredLang={preferredLang} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl">
-            <h3 className="text-2xl font-bold mb-6 text-center text-midnight"><DualText en={t.newsletterTitle} he={t.newsletterTitle} preferredLang={preferredLang} /></h3>
-            <Newsletter t={t} />
+
+          {/* Newsletter with elegant design */}
+          <div className="bg-gradient-to-br from-rose/5 to-snow/80 backdrop-blur p-8 rounded-3xl shadow-xl border border-rose/20 hover:shadow-2xl transition">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-4xl">💌</span>
+              <h3 className="text-2xl font-bold text-midnight">
+                <DualText en={t.newsletterTitle} he={t.newsletterTitleHe} preferredLang={preferredLang} />
+              </h3>
+            </div>
+            <div className="space-y-6">
+              <input
+                type="email"
+                placeholder={preferredLang === 'en' ? t.newsletterPlaceholder : t.newsletterPlaceholderHe}
+                className="w-full p-4 rounded-xl border border-rose/20 bg-white/70 focus:border-rose outline-none"
+              />
+              <button className="w-full bg-rose text-snow py-4 rounded-xl font-bold text-lg hover:bg-rose/90 transition shadow-lg">
+                <DualText en={t.subscribeBtn} he={t.subscribeBtnHe} preferredLang={preferredLang} />
+              </button>
+            </div>
           </div>
         </div>
       </AnimatedSection>
 
-      {/* News */}
+      {/* News redesigned */}
       <AnimatedSection className="py-16 bg-snow">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <h3 className="text-4xl font-extrabold mb-10 text-midnight"><DualText en={t.newsTitle} he={t.newsTitle} preferredLang={preferredLang} /></h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {t.newsItems.map((item: string, i: number) => (
-              <div key={i} className="bg-cloud p-6 rounded-2xl shadow-md hover:shadow-xl transition">
-                <DualText en={item} he={item} preferredLang={preferredLang} />
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="flex items-center justify-center gap-4 mb-12">
+            <span className="text-5xl">📰</span>
+            <h3 className="text-4xl font-extrabold text-midnight">
+              <DualText en={t.newsTitle} he={t.newsTitleHe} preferredLang={preferredLang} />
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {t.newsItems.map((item: any, i: number) => (
+              <div key={i} className="group bg-gradient-to-br from-cloud to-snow p-6 rounded-2xl shadow-md hover:shadow-xl transition hover:-translate-y-1 border border-cloud/50">
+                <p className="text-midnight/80 font-medium">
+                  <DualText en={item.en} he={item.he} preferredLang={preferredLang} />
+                </p>
+                <div className="mt-4 w-8 h-1 bg-rose rounded-full group-hover:w-12 transition-all" />
               </div>
             ))}
           </div>
@@ -439,8 +587,8 @@ export default function Home() {
       {/* Contact */}
       <AnimatedSection className="py-20 bg-gradient-to-br from-midnight to-rose/30 text-snow">
         <div className="max-w-4xl mx-auto px-6 text-center">
-          <DualText en={t.contactTitle} he={t.contactTitle} as="h2" classNameEn="text-4xl md:text-5xl font-extrabold mb-8" classNameHe="text-4xl md:text-5xl font-extrabold mb-8" preferredLang={preferredLang} />
-          <DualText en={t.contactText} he={t.contactText} classNameEn="text-2xl mb-12 text-cloud/80" classNameHe="text-2xl mb-12 text-cloud/80" preferredLang={preferredLang} />
+          <DualText en={t.contactTitle} he={t.contactTitleHe} as="h2" classNameEn="text-4xl md:text-5xl font-extrabold mb-8" classNameHe="text-4xl md:text-5xl font-extrabold mb-8" preferredLang={preferredLang} />
+          <DualText en={t.contactText} he={t.contactTextHe} classNameEn="text-2xl mb-12 text-cloud/80" classNameHe="text-2xl mb-12 text-cloud/80" preferredLang={preferredLang} />
           <a href="mailto:hello@tanami360.com" className="ripple inline-flex items-center gap-3 bg-rose text-snow px-10 py-5 rounded-full text-xl font-semibold hover:bg-rose/90 transition shadow-2xl">
             hello@tanami360.com
           </a>
@@ -449,7 +597,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-midnight text-snow/60 py-8 text-center text-sm">
-        <DualText en={t.footer} he={t.footer} preferredLang={preferredLang} />
+        <DualText en={t.footer} he={t.footerHe} preferredLang={preferredLang} />
       </footer>
     </div>
   );
@@ -469,53 +617,4 @@ function ScrollProgress() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
   return <div id="scroll-progress" style={{ width: `${width}%` }} />;
-}
-
-function CostCalculator({ t, preferredLang }: { t: any; preferredLang: LangPref }) {
-  const [hours, setHours] = useState(20);
-  const [rate, setRate] = useState(150);
-  return (
-    <div className="text-center">
-      <label className="block mb-3 text-midnight font-medium"><DualText en={t.calcHoursLabel} he={t.calcHoursLabel} preferredLang={preferredLang} /></label>
-      <input type="number" value={hours} onChange={e => setHours(+e.target.value)} className="w-full p-3 rounded-xl border border-cloud mb-5 text-lg" />
-      <label className="block mb-3 text-midnight font-medium"><DualText en={t.calcRateLabel} he={t.calcRateLabel} preferredLang={preferredLang} /></label>
-      <input type="number" value={rate} onChange={e => setRate(+e.target.value)} className="w-full p-3 rounded-xl border border-cloud mb-5 text-lg" />
-      <div className="text-3xl font-extrabold text-rose"><DualText en={`${t.calcResult}${hours * rate}`} he={`${t.calcResult}${hours * rate}`} preferredLang={preferredLang} /></div>
-    </div>
-  );
-}
-
-function Calendar({ t }: { t: any }) {
-  const today = new Date();
-  const hebrewDate = new Intl.DateTimeFormat('he-IL-u-ca-hebrew', { dateStyle: 'full' }).format(today);
-  return (
-    <div className="text-center">
-      <p className="text-2xl font-bold text-midnight">{today.toDateString()}</p>
-      <p className="text-lg text-rose mt-2">{hebrewDate}</p>
-      <div className="mt-6">
-        <h4 className="font-semibold text-midnight mb-3">Upcoming / קרובים</h4>
-        <ul className="space-y-2 text-sm text-midnight/70">
-          {t.holidays.map((h: string) => <li key={h}>{h}</li>)}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function Newsletter({ t }: { t: any }) {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-  const subscribe = () => {
-    fetch('/api/lead', { method: 'POST', body: JSON.stringify({ type: 'newsletter', email }) });
-    setSubscribed(true);
-  };
-  if (subscribed) return <p className="text-rose font-bold text-xl">Thanks! / תודה!</p>;
-  return (
-    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-      <input type="email" placeholder={t.newsletterPlaceholder} value={email} onChange={e => setEmail(e.target.value)} className="p-4 rounded-xl border border-cloud flex-1 text-lg" />
-      <button onClick={subscribe} className="bg-rose text-snow px-8 py-4 rounded-xl font-bold text-lg hover:bg-rose/90 transition shadow-lg">
-        {t.subscribeBtn}
-      </button>
-    </div>
-  );
 }

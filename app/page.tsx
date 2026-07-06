@@ -114,47 +114,23 @@ const content = {
   },
 };
 
-// ============ DualTextInline (for buttons/links) ============
-function DualTextInline({
-  en,
-  he,
-  preferredLang,
-  classNameEn = '',
-  classNameHe = '',
-}: {
-  en: string;
-  he: string;
-  preferredLang: LangPref;
-  classNameEn?: string;
-  classNameHe?: string;
-}) {
+// ============ DualTextInline ============
+function DualTextInline({ en, he, preferredLang }: { en: string; he: string; preferredLang: LangPref }) {
   const isEn = preferredLang === 'en';
   return (
     <>
-      <span className={`${isEn ? 'font-bold' : 'text-sm opacity-50'} ${classNameEn}`}>{en}</span>
+      <span className={isEn ? 'font-bold' : 'text-sm opacity-50'}>{en}</span>
       <span className="mx-1 opacity-50">/</span>
-      <span className={`${isEn ? 'text-sm opacity-50' : 'font-bold'} ${classNameHe}`}>{he}</span>
+      <span className={isEn ? 'text-sm opacity-50' : 'font-bold'}>{he}</span>
     </>
   );
 }
 
-// ============ DualText (full for sections) ============
+// ============ DualText ============
 function DualText({
-  en,
-  he,
-  as: Tag = 'p',
-  classNameEn = '',
-  classNameHe = '',
-  containerClassName = '',
-  preferredLang = 'en',
+  en, he, as: Tag = 'p', classNameEn = '', classNameHe = '', containerClassName = '', preferredLang = 'en',
 }: {
-  en: string;
-  he: string;
-  as?: React.ElementType;
-  classNameEn?: string;
-  classNameHe?: string;
-  containerClassName?: string;
-  preferredLang?: LangPref;
+  en: string; he: string; as?: React.ElementType; classNameEn?: string; classNameHe?: string; containerClassName?: string; preferredLang?: LangPref;
 }) {
   const isEn = preferredLang === 'en';
   const primaryClass = 'text-current font-bold';
@@ -188,7 +164,7 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
   );
 }
 
-// ============ Accessibility Widget ============
+// ============ AccessibilityWidget ============
 function AccessibilityWidget() {
   const [open, setOpen] = useState(false);
   const [fontSize, setFontSize] = useState(100);
@@ -239,6 +215,7 @@ export default function Home() {
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const wizardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem('tanami360-pref-lang');
@@ -251,6 +228,7 @@ export default function Home() {
   };
 
   const t = content.en;
+
   const selectPlatform = (p: string) => { setSelection(prev => ({ ...prev, platform: p })); setStep(1); };
   const toggleFeature = (f: string) => setSelection(prev => ({
     ...prev,
@@ -315,9 +293,15 @@ export default function Home() {
             <DualText en={t.heroTitle} he={t.heroTitleHe} preferredLang={preferredLang} containerClassName="flex-col md:flex-row" />
           </h1>
           <DualText en={t.heroSub} he={t.heroSubHe} classNameEn="text-xl md:text-2xl mb-12 text-cloud/80" classNameHe="text-xl md:text-2xl mb-12 text-cloud/80" preferredLang={preferredLang} />
-          {/* FIXED: No div inside button */}
+          {/* FIXED: button now scrolls to wizard */}
           <button
-            onClick={() => { setStep(0); setSent(false); }}
+            onClick={() => {
+              setStep(0);
+              setSent(false);
+              setTimeout(() => {
+                wizardRef.current?.scrollIntoView({ behavior: 'smooth' });
+              }, 100);
+            }}
             className="ripple inline-flex items-center gap-3 bg-rose text-snow px-10 py-5 rounded-full text-xl font-semibold hover:bg-rose/90 transition-all shadow-2xl hover:scale-105"
           >
             <DualTextInline en={t.startCta} he={t.startCtaHe} preferredLang={preferredLang} />
@@ -331,8 +315,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Wizard */}
-      <section className="py-20 bg-transparent relative -mt-12">
+      {/* Wizard (with ref) */}
+      <section ref={wizardRef} id="wizard" className="py-20 bg-transparent relative -mt-12">
         <div className="max-w-6xl mx-auto px-6">
           <div className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-2xl p-8 md:p-12 border border-white/50">
             {!sent ? (
@@ -476,10 +460,10 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* ---- REDESIGNED SECTIONS ---- */}
+      {/* Calculator, Calendar, Newsletter */}
       <AnimatedSection className="py-20 bg-cloud">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* Calculator with glassmorphism */}
+          {/* Calculator */}
           <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl border border-white/50 hover:shadow-2xl transition">
             <div className="flex items-center gap-3 mb-8">
               <span className="text-4xl">🧮</span>
@@ -508,7 +492,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Calendar with rich styling */}
+          {/* Calendar */}
           <div className="bg-white/80 backdrop-blur p-8 rounded-3xl shadow-xl border border-white/50 hover:shadow-2xl transition">
             <div className="flex items-center gap-3 mb-8">
               <span className="text-4xl">📅</span>
@@ -540,7 +524,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Newsletter with elegant design */}
+          {/* Newsletter */}
           <div className="bg-gradient-to-br from-rose/5 to-snow/80 backdrop-blur p-8 rounded-3xl shadow-xl border border-rose/20 hover:shadow-2xl transition">
             <div className="flex items-center gap-3 mb-8">
               <span className="text-4xl">💌</span>
@@ -562,7 +546,7 @@ export default function Home() {
         </div>
       </AnimatedSection>
 
-      {/* News redesigned */}
+      {/* News */}
       <AnimatedSection className="py-16 bg-snow">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex items-center justify-center gap-4 mb-12">

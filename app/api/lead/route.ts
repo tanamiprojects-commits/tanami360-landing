@@ -1,16 +1,21 @@
 import { Resend } from 'resend';
 
-// אתחול ה-Resend עם מפתח ה-API שלנו (נתון שיישמר ב-Vercel)
+// אתחול ה-Resend עם מפתח ה-API (שמור ב-Vercel Environment Variables)
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log('New lead:', body);
+    console.log('New lead body:', body);
 
-    // כאן אנו שולחים את המייל בפועל!
+    // בדיקה מוקדמת: האם המפתח קיים?
+    if (!process.env.RESEND_API_KEY) {
+      console.error('❌ Missing RESEND_API_KEY environment variable');
+      return Response.json({ error: 'Configuration Error: Missing API Key' }, { status: 500 });
+    }
+
     const { data, error } = await resend.emails.send({
-      from: 'Tanami360 <onboarding@resend.dev>', // שלב מתקדם: אחרי אימות דומיין Resend נחליף את זה ל- hello@tanami360.com
+      from: 'Tanami360 <onboarding@resend.dev>',
       to: ['hello@tanami360.com'],
       subject: 'פנייה חדשה מאתר Tanami360!',
       html: `
@@ -26,8 +31,7 @@ export async function POST(request: Request) {
       return Response.json({ error: error.message }, { status: 500 });
     }
 
-    // אם הכל עבר בהצלחה, מחזירים הצלחה
-    return Response.json({ success: true, data });
+    return Response.json({ success: true });
     
   } catch (error) {
     console.error('Server Error:', error);

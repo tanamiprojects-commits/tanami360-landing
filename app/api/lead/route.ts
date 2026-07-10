@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await resend.emails.send({
       from: 'Tanami360 <onboarding@resend.dev>',
-      to: ['hello@tanami360.com'],
+      to: ['tanami.projects@gmail.com'],
       subject: 'פנייה חדשה מאתר Tanami360!',
       html: `
         <h2>התקבלה פנייה חדשה מהאתר</h2>

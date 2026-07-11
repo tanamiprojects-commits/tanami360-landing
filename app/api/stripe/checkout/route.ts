@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-
 export async function POST(req: Request) {
   try {
+    // אתחול Stripe בתוך הפונקציה - זה פותר את בעיית ה-Build!
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+
     const body = await req.json();
     const { priceId, userId, organizationId } = body;
 
@@ -33,6 +34,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (err) {
     console.error('Error creating checkout session:', err);
+    // אם נכשלנו בגלל שאין מפתח, זה יחזיר שגיאה ברורה במקום לקרוס בבנייה
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

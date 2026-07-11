@@ -5,14 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
-// ✅ השורה הבאה פותרת את בעיית ה-Build!
 export const dynamic = 'force-dynamic';
-
-// אתחול הלקוח
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,6 +16,13 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    // ✅ האתחול נעשה כאן, בתוך הפונקציה, רק כשהמשתמש לוחץ! פותר את שגיאת ה-Build.
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     if (error) {
       alert("שגיאה: " + error.message);

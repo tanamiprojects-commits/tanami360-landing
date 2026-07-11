@@ -5,14 +5,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
-// ✅ השורה הבאה פותרת את בעיית ה-Build!
+// דף דינמי (מונע ניסיון Pre-rendering בשרת)
 export const dynamic = 'force-dynamic';
-
-// אתחול הלקוח של Supabase מול ה-URL וה-ANON KEY שלך
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -20,6 +14,12 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // ✅ האתחול נעשה אך ורק בצד הלקוח - זה פותר את ה-Build Error!
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+
     const getUser = async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) {

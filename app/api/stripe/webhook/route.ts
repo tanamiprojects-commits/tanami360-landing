@@ -2,9 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-20.acacia',
-});
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
 
 // Supabase Client לשרת (עם Service Role Key)
 const supabase = createClient(
@@ -25,8 +23,10 @@ export async function POST(req: Request) {
       process.env.STRIPE_WEBHOOK_SECRET!
     );
   } catch (err) {
+    // תיקון: TypeScript דורש בדיקה ש-err הוא מסוג Error לפני גישה ל-message
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
     console.error(`Webhook signature verification failed.`, err);
-    return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+    return NextResponse.json({ error: `Webhook Error: ${errorMessage}` }, { status: 400 });
   }
 
   // טיפול באירועים מ-Stripe

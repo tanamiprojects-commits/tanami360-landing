@@ -5,6 +5,9 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
 
+// ✅ השורה הבאה פותרת את בעיית ה-Build!
+export const dynamic = 'force-dynamic';
+
 // אתחול הלקוח של Supabase מול ה-URL וה-ANON KEY שלך
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

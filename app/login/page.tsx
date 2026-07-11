@@ -17,7 +17,6 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
 
-    // ✅ האתחול נעשה כאן, בתוך הפונקציה, רק כשהמשתמש לוחץ! פותר את שגיאת ה-Build.
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
@@ -59,7 +58,7 @@ export default function LoginPage() {
           {loading ? "מתחבר..." : "התחבר"}
         </button>
         <p className="text-sm text-center mt-4">
-          עדיין לא נרשמת? <span className="text-[#FF3B5C] cursor-pointer" onClick={() => alert("יש להוסיף דף הרשמה נפרד בהמשך")}>הירשם כאן</span>
+          עדיין לא נרשמת? <span className="text-[#FF3B5C] cursor-pointer" onClick={() => router.push("/signup")}>הירשם כאן</span>
         </p>
       </form>
     </div>

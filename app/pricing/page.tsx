@@ -9,8 +9,8 @@ export default function PricingPage() {
   const handleSubscribe = async () => {
     setLoading(true);
     try {
-      // ⚠️ ממש כאן, בשורה הבאה, אתה צריך להדביק את ה-ID שמצאת ב-Stripe:
-      const priceId = "price_1Ts1UxHaU1rZ5s1kJCYGBObR"; // <--- החלף כאן בנתון האמיתי!
+      // ⚠️ החלף את המחרוזת הזו בנתון האמיתי שמצאת ב-Stripe!
+      const priceId = "price_1Ts1UxHaU1rZ5s1kJCYGBObR"; 
 
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
@@ -20,13 +20,15 @@ export default function PricingPage() {
 
       const data = await res.json();
       if (data.url) {
-        window.location.href = data.url;
+        window.location.href = data.url; // מעבר לדף התשלום של Stripe
       } else {
-        alert("שגיאה ביצירת התשלום.");
+        // אם קיבלנו שגיאה מהשרת, נדפיס אותה לקונסול כדי שנראה מה קרה
+        console.error("שגיאה מהשרת:", data);
+        alert("שגיאה: " + (data.error || "לא ידוע"));
       }
     } catch (error) {
       console.error(error);
-      alert("שגיאה");
+      alert("שגיאה בחיבור לשרת");
     } finally {
       setLoading(false);
     }
